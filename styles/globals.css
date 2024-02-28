@@ -4,8 +4,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
 
 a {
@@ -18,5 +17,47 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  background-color: snow;
+}
+
+.navi {
+  background-color: snow;
+}
+
+#home-container .product-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#home-container .product-item {
+  margin-right: 70px;
+  margin-bottom: 20px;
+}
+
+#product-details {
+display: flex;
+justify-content: center;
+}
+
+#signin {
+  display: flex;
+  background-color: #f3f8fd;
+  border-color: #f2f2ff;
+  color: black;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 15px;
+  border-radius: 20px;
+}
+
+#enter {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.details-btn {
+  background: none;
+  border: none;
+  padding: 0;
 }
