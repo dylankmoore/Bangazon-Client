@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../utils/context/authContext';
@@ -28,10 +29,19 @@ function Home() {
       <h1>Welcome, {user.fbUser.displayName}! </h1>
       <br /><br />
       <h2>Latest Products:</h2>
-      <br />
+      <br /><br />
       <div className="product-container">
         {latestProducts.map((product) => (
           <div key={product.id} className="product-item">
+            <img
+              src={product.imageURL}
+              alt={product.name}
+              style={{
+                maxWidth: '200px',
+                maxHeight: '200px',
+                marginBottom: '10px',
+              }}
+            />
             <Link href={`/products/${product.id}`} passHref>
               <button type="button" className="details-btn" onClick={handleClick}>{product.name}</button>
             </Link>

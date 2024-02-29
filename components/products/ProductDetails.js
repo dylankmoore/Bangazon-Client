@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
+/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ProductDetails = ({ product }) => (
+const ProductDetails = ({ product, handleAddToCart }) => (
   <div className="product-details">
     <br /><h1>{product.name}</h1><br />
     <img
@@ -17,7 +18,8 @@ const ProductDetails = ({ product }) => (
     <p>Description: {product.description}</p>
     <p>Price: ${product.price}</p>
     <p>Seller: {product.seller?.firstName} {product.seller?.lastName || 'Unknown'}</p>
-    <p>Category: {product.category?.name || 'Unknown'}</p>
+    <p>Category: {product.category?.name || 'Unknown'}</p><br />
+    <button type="button" onClick={() => handleAddToCart(product)}>Add to Cart</button>
   </div>
 );
 
@@ -36,6 +38,7 @@ ProductDetails.propTypes = {
       name: PropTypes.string,
     }),
   }).isRequired,
+  handleAddToCart: PropTypes.func.isRequired,
 };
 
 export default ProductDetails;

@@ -15,7 +15,7 @@ function Signin() {
     >
       <img src="/bangazon.png" alt="logo" className="nav-logo" width="400" height="150" /><br />
       <Button type="button" id="signin" size="lg" className="copy-btn" onClick={signIn}>
-        sign in
+        <b>sign in</b>
       </Button>
       <br /><br /><br />
     </div>

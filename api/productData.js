@@ -49,4 +49,43 @@ const getProductById = (productId) => {
   });
 };
 
-export { getProducts, getProductById };
+// ADD PRODUCT TO CART
+const addProductToCart = (productId, customerId) => {
+  const url = `${endpoint}/api/cart`;
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ productId, customerId }),
+  };
+
+  return fetch(url, options)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to add product to cart');
+      }
+      return response.json();
+    });
+};
+
+// GET CART DETAILS/PRODUCTS
+const getCartDetails = (customerId) => {
+  const url = `${endpoint}/api/cart?customerId=${customerId}`; // Include customerId in the endpoint URL
+  return fetch(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Failed to fetch cart details');
+      }
+      return response.json();
+    });
+};
+
+export {
+  getProducts, getProductById, addProductToCart, getCartDetails,
+};

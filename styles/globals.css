@@ -61,3 +61,21 @@ justify-content: center;
   border: none;
   padding: 0;
 }
+
+::-webkit-scrollbar {
+  height: 12px;
+  width: 12px;
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #eaeef5;
+}
+
+::-webkit-scrollbar-button:end {
+  background: rgb(87, 87, 255);
+}
+
+::-webkit-scrollbar-button:start {
+  background: rgb(87, 87, 255);
+}
