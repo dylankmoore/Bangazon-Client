@@ -1,12 +1,23 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import ProductDetails from '../../components/products/ProductDetails';
-import { getProductById } from '../../api/productData';
+import { getProductById, addProductToCart } from '../../api/productData';
 
 function ProductDetailPage() {
   const router = useRouter();
-  const { productId } = router.query;
+  const { productId, customerId } = router.query;
   const [product, setProduct] = useState(null);
+
+  const handleAddToCart = async () => {
+    console.warn(customerId);
+    try {
+      await addProductToCart(productId, customerId);
+      console.warn(customerId);
+      router.push(`/cart?customerId=${customerId}`);
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+    }
+  };
 
   useEffect(() => {
     async function fetchProduct() {
@@ -26,7 +37,7 @@ function ProductDetailPage() {
   return (
     <div>
       {product ? (
-        <ProductDetails product={product} />
+        <ProductDetails product={product} handleAddToCart={handleAddToCart} />
       ) : (<p>Loading...</p>)}
     </div>
   );
