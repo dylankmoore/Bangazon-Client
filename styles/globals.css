@@ -22,6 +22,7 @@ body {
 
 .navi {
   background-color: snow;
+  font-size: 14px;
 }
 
 #home-container .product-container {
@@ -78,4 +79,10 @@ justify-content: center;
 
 ::-webkit-scrollbar-button:start {
   background: rgb(87, 87, 255);
+}
+
+#searchbtn {
+  height: 35px;
+  background-color: whitesmoke;
+  border-color: whitesmoke;
 }
