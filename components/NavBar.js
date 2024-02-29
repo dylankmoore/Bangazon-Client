@@ -6,20 +6,21 @@ import {
   Navbar, Container, Nav,
 } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
+import ProductSearch from './SearchProducts';
 
 export default function NavBar() {
   return (
     <Navbar collapseOnSelect expand="lg" className="navi">
-      <Container>
+      <Container fluid>
         <Link passHref href="/">
           <Navbar.Brand>
-            <img src="/bangazon.png" alt="logo" className="nav-logo" width="170" height="30" />
+            <img src="/bangazon.png" alt="logo" className="nav-logo me-3" width="170" height="30" />
           </Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            {/* CLOSE NAVBAR ON LINK SELECTION: https://stackoverflow.com/questions/72813635/collapse-on-select-react-bootstrap-navbar-with-nextjs-not-working */}&nbsp;&nbsp;&nbsp;&nbsp;
+        <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-between">
+          <Nav className="me-auto mb-2 mb-lg-0">
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             <Link passHref href="/">
               <Nav.Link>Home</Nav.Link>
             </Link>
@@ -38,27 +39,23 @@ export default function NavBar() {
             <Link passHref href="/cart">
               <Nav.Link>Cart</Nav.Link>
             </Link>
-            <button
-              type="button"
-              onClick={signOut}
-              style={{
-                border: 'none',
-                background: 'none',
-                marginLeft: '380px',
-                padding: '0',
-              }}
-            >
-              <img
-                src="/signout.png"
-                alt="signout"
-                className="nav-logo"
-                width="140"
-                height="30"
-                style={{ cursor: 'pointer' }}
-              />
-            </button>
           </Nav>
+          <ProductSearch />
         </Navbar.Collapse>
+        <button
+          type="button"
+          onClick={signOut}
+          className="btn btn-link"
+        >
+          <img
+            src="/signout.png"
+            alt="signout"
+            className="nav-logo"
+            width="140"
+            height="30"
+            style={{ cursor: 'pointer' }}
+          />
+        </button>
       </Container>
     </Navbar>
   );

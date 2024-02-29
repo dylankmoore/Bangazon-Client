@@ -86,6 +86,26 @@ const getCartDetails = (customerId) => {
     });
 };
 
+// SEARCH PRODUCTS
+const searchProducts = async (searchQuery) => {
+  try {
+    console.warn('Fetching search results for query:', searchQuery);
+    const response = await fetch(`/api/products/search?name=${searchQuery}&description=${searchQuery}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch search results');
+    }
+    const data = await response.json();
+    console.warn('Received search results:', data);
+    return data;
+  } catch (error) {
+    throw new Error(`Error searching products: ${error.message}`);
+  }
+};
+
 export {
-  getProducts, getProductById, addProductToCart, getCartDetails,
+  getProducts,
+  getProductById,
+  addProductToCart,
+  getCartDetails,
+  searchProducts,
 };
