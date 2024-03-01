@@ -27,13 +27,13 @@ export default function NavBar() {
             <Link passHref href="/profile">
               <Nav.Link>Profile</Nav.Link>
             </Link>
-            <Link passHref href="/product-categories">
+            <Link passHref href="/categories">
               <Nav.Link>Product Categories</Nav.Link>
             </Link>
-            <Link passHref href="/order-history">
+            <Link passHref href="/orderhistory">
               <Nav.Link>Order History</Nav.Link>
             </Link>
-            <Link passHref href="/seller-dashboard">
+            <Link passHref href="/sellerdashboard">
               <Nav.Link>Seller Dashboard</Nav.Link>
             </Link>
             <Link passHref href="/cart">

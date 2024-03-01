@@ -51,6 +51,16 @@ justify-content: center;
   border-radius: 20px;
 }
 
+#regbtn {
+    display: flex;
+    background-color: #f3f8fd;
+    border-color: #f2f2ff;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    border-radius: 20px;
+}
+
 #enter {
   display: flex;
   flex-direction: row;
@@ -85,4 +95,12 @@ justify-content: center;
   height: 35px;
   background-color: whitesmoke;
   border-color: whitesmoke;
+}
+
+a:hover {
+  color:rgb(108, 108, 108);
+}
+
+.details-btn:hover {
+  color:rgb(108, 108, 108);
 }
