@@ -1,12 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import { getCartDetails } from '../api/productData';
+import PropTypes from 'prop-types';
+import { getCartDetails, getProductById } from '../api/productData';
 
-function ShoppingCartPage() {
-  const router = useRouter();
-  const { customerId } = router.query;
-  console.warn(router.query);
+function ShoppingCartPage({ customerId }) {
   const [cartProducts, setCartProducts] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
 
@@ -24,15 +20,28 @@ function ShoppingCartPage() {
     fetchCartProducts();
   }, [customerId]);
 
+  useEffect(() => {
+    async function fetchProductDetails() {
+      const productsWithDetails = await Promise.all(
+        cartProducts.map(async (product) => {
+          const productDetails = await getProductById(product.productId);
+          return { ...product, name: productDetails.productName };
+        }),
+      );
+      setCartProducts(productsWithDetails);
+    }
+
+    if (cartProducts.length > 0) {
+      fetchProductDetails();
+    }
+  }, [cartProducts]);
+
   return (
-    <div><br />
-      <h1>Shopping Cart</h1><br />
+    <div>
+      <h1>Shopping Cart</h1>
       <ul>
         {cartProducts.map((product) => (
-          <li key={product.id}>
-            <div>
-              <img src={product.image} alt={product.name} style={{ width: '100px', height: '100px' }} />
-            </div>
+          <li key={product.productId}>
             <div>
               <p>{product.name}</p>
               <p>Price: ${product.price}</p>
@@ -44,4 +53,12 @@ function ShoppingCartPage() {
     </div>
   );
 }
+
+ShoppingCartPage.propTypes = {
+  customerId: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]).isRequired,
+};
+
 export default ShoppingCartPage;

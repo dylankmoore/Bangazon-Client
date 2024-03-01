@@ -1,39 +1,70 @@
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { Button, Form } from 'react-bootstrap';
 import { registerUser } from '../utils/auth';
 
-function RegisterForm({ user, updateUser }) {
+function RegisterForm({ firebaseUID }) {
   const [formData, setFormData] = useState({
-    bio: '',
-    uid: user.uid,
+    username: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+    isSeller: false,
   });
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    registerUser(formData).then(() => updateUser(user.uid));
+    const registrationData = { ...formData, Uid: firebaseUID };
+    try {
+      await registerUser(registrationData);
+    } catch (error) {
+      console.error('Error registering user:', error);
+    }
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Gamer Bio</Form.Label>
-        <Form.Control as="textarea" name="bio" required placeholder="Enter your Bio" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
-        <Form.Text className="text-muted">Let other gamers know a little bit about you...</Form.Text>
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </Form>
+    <div className="form-container">
+      <br /><h1>Registration</h1><br /><br />
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="username">
+          <Form.Label>Username:</Form.Label>
+          <Form.Control type="text" name="username" value={formData.username} onChange={handleChange} required />
+        </Form.Group><br />
+        <Form.Group controlId="firstName">
+          <Form.Label>First Name:</Form.Label>
+          <Form.Control type="text" name="firstName" value={formData.firstName} onChange={handleChange} required />
+        </Form.Group><br />
+        <Form.Group controlId="lastName">
+          <Form.Label>Last Name:</Form.Label>
+          <Form.Control type="text" name="lastName" value={formData.lastName} onChange={handleChange} required />
+        </Form.Group><br />
+        <Form.Group controlId="email">
+          <Form.Label>Email:</Form.Label>
+          <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} required />
+        </Form.Group><br />
+        <Form.Group controlId="address">
+          <Form.Label>Address:</Form.Label>
+          <Form.Control type="text" name="address" value={formData.address} onChange={handleChange} required />
+        </Form.Group><br /><br />
+        <Button id="regbtn2" type="<b>submit</b>">
+          Submit
+        </Button>
+      </Form>
+    </div>
   );
 }
 
 RegisterForm.propTypes = {
-  user: PropTypes.shape({
-    uid: PropTypes.string.isRequired,
-  }).isRequired,
-  updateUser: PropTypes.func.isRequired,
+  firebaseUID: PropTypes.string.isRequired,
 };
 
 export default RegisterForm;

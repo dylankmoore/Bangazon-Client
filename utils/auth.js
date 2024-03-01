@@ -20,7 +20,7 @@ const checkUser = (userId) => new Promise((resolve, reject) => {
 });
 
 const registerUser = (userInfo) => new Promise((resolve, reject) => {
-  fetch('https://localhost:7203/api/users', {
+  fetch('https://localhost:7203/api/register', {
     method: 'POST',
     body: JSON.stringify(userInfo),
     headers: {
