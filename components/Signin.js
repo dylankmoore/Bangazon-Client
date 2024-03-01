@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import Link from 'next/link';
 import { signIn } from '../utils/auth';
 
 function Signin() {
@@ -16,8 +17,16 @@ function Signin() {
       <img src="/bangazon.png" alt="logo" className="nav-logo" width="400" height="150" /><br />
       <Button type="button" id="signin" size="lg" className="copy-btn" onClick={signIn}>
         <b>sign in</b>
-      </Button>
-      <br /><br /><br />
+      </Button><br />
+      <Link passHref href="/registration">
+        <div>
+          <Button type="button" id="regbtn" size="lg" className="copy-btn">
+            <b>register</b>
+          </Button>
+        </div>
+      </Link>
+      <br />
+      <br /><br />
     </div>
   );
 }
