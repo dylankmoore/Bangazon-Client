@@ -35,7 +35,7 @@ function Categories() {
                   </a>
                 </li>
               ))}
-            </ul>
+            </ul><br />
           </li>
         ))}
       </ul>

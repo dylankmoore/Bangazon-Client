@@ -71,7 +71,7 @@ const addProductToCart = (productId, customerId) => {
 
 // GET CART DETAILS/PRODUCTS
 const getCartDetails = (customerId) => {
-  const url = `${endpoint}/api/cart?customerId=${customerId}`; // Include customerId in the endpoint URL
+  const url = `${endpoint}/api/cart?customerId=${customerId}`;
   return fetch(url, {
     method: 'GET',
     headers: {
@@ -87,20 +87,17 @@ const getCartDetails = (customerId) => {
 };
 
 // SEARCH PRODUCTS
-const searchProducts = async (searchQuery) => {
-  try {
-    console.warn('Fetching search results for query:', searchQuery);
-    const response = await fetch(`/api/products/search?name=${searchQuery}&description=${searchQuery}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch search results');
-    }
-    const data = await response.json();
-    console.warn('Received search results:', data);
-    return data;
-  } catch (error) {
-    throw new Error(`Error searching products: ${error.message}`);
-  }
-};
+const searchProducts = (searchQuery) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/products/search/${searchQuery}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
 
 export {
   getProducts,

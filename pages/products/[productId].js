@@ -9,10 +9,13 @@ function ProductDetailPage() {
   const [product, setProduct] = useState(null);
 
   const handleAddToCart = async () => {
-    console.warn(customerId);
+    console.warn(customerId, productId);
+    console.warn('Product ID:', product.id);
+    console.warn('Customer ID:', customerId);
+
     try {
       await addProductToCart(productId, customerId);
-      console.warn(customerId);
+      console.warn(customerId, productId);
       router.push(`/cart?customerId=${customerId}`);
     } catch (error) {
       console.error('Error adding product to cart:', error);
