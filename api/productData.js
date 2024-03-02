@@ -71,6 +71,7 @@ const addProductToCart = (productId, customerId) => {
 
 // GET CART DETAILS/PRODUCTS
 const getCartDetails = (customerId) => {
+  console.warn('Fetching cart details for customerId:', customerId);
   const url = `${endpoint}/api/cart?customerId=${customerId}`;
   return fetch(url, {
     method: 'GET',
@@ -88,7 +89,7 @@ const getCartDetails = (customerId) => {
 
 // SEARCH PRODUCTS
 const searchProducts = (searchQuery) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/api/products/search/${searchQuery}`, {
+  fetch(`${endpoint}/api/products/search?searchQuery=${encodeURIComponent(searchQuery)}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

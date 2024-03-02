@@ -9,11 +9,11 @@ function Signin() {
     <div className="text-center d-flex flex-column justify-content-center align-content-center" id="enter" style={{ height: '70vh', padding: '400px' }}>
       <img src="/bangazon.png" alt="logo" className="nav-logo" width="400" height="150" /><br />
       <Button type="button" id="signin" size="lg" className="copy-btn" onClick={signIn}>
-        <b>sign in</b>
+        sign in
       </Button><br />
       <Link passHref href="/registration">
-        <Button as="a" type="button" id="regbtn" size="lg" className="copy-btn">
-          <b>register</b>
+        <Button type="button" id="regbtn" className="copy-btn">
+          register
         </Button>
       </Link>
       <br /><br /><br />

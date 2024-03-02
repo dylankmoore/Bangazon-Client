@@ -5,7 +5,7 @@ import { getProductById, addProductToCart } from '../../api/productData';
 
 function ProductDetailPage() {
   const router = useRouter();
-  const { productId, customerId } = router.query;
+  const { productId, customerId } = useRouter().query;
   const [product, setProduct] = useState(null);
 
   const handleAddToCart = async () => {

@@ -1,52 +1,61 @@
 /* eslint-disable @next/next/no-img-element */
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useAuth } from '../utils/context/authContext';
-import { getProducts } from '../api/productData';
+import { getProducts, searchProducts } from '../api/productData';
 
 function Home() {
   const { user } = useAuth();
-  const [latestProducts, setLatestProducts] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [customerId, setCustomerId] = useState('');
+  const router = useRouter();
+  const { search } = router.query;
 
   useEffect(() => {
-    async function fetchLatestProducts() {
+    const storedCustomerId = localStorage.getItem('customerId');
+    if (storedCustomerId) {
+      setCustomerId(storedCustomerId);
+    }
+  }, []);
+
+  useEffect(() => {
+    async function fetchProducts() {
       try {
-        const products = await getProducts();
-        setLatestProducts(products);
+        let fetchedProducts;
+        if (search) {
+          fetchedProducts = await searchProducts(search);
+        } else {
+          fetchedProducts = await getProducts();
+        }
+        setProducts(fetchedProducts);
       } catch (error) {
-        console.error('Error fetching latest products:', error);
+        console.error('Error fetching products:', error);
       }
     }
 
-    fetchLatestProducts();
-  }, []);
-
-  function handleClick() {}
+    fetchProducts();
+  }, [search]);
 
   return (
     <div id="home-container" className="text-center">
-      <br />
-      <h1>Welcome, {user.fbUser.displayName}! </h1>
       <br /><br />
-      <h2>Latest Products:</h2>
-      <br /><br />
+      <h1>Welcome, {user?.fbUser?.displayName || 'Guest'}!</h1><br />
+      <h2>{search ? `Search Results for "${search}":` : 'Latest Products:'}</h2><br /><br />
       <div className="product-container">
-        {latestProducts.map((product) => (
-          <div key={product.id} className="product-item">
-            <img
-              src={product.imageURL}
-              alt={product.name}
-              style={{
-                maxWidth: '200px',
-                maxHeight: '200px',
-                marginBottom: '10px',
-              }}
-            />
-            <Link href={`/products/${product.id}`} passHref>
-              <button type="button" className="details-btn" onClick={handleClick}>{product.name}</button>
-            </Link>
-          </div>
-        ))}
+        {products.length > 0 ? (
+          products.map((product) => (
+            <div key={product.id} className="product-item">
+              <img src={product.imageURL} alt={product.name} style={{ maxWidth: '200px', maxHeight: '200px', marginBottom: '10px' }} />
+              {/* Include customerId in the URL if available */}
+              <Link href={`/products/${product.id}${customerId ? `?customerId=${customerId}` : ''}`} passHref>
+                <button type="button" className="details-btn">{product.name}</button>
+              </Link>
+            </div>
+          ))
+        ) : (
+          <p>No products found!</p>
+        )}
       </div>
     </div>
   );
