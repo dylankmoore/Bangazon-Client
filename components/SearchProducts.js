@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { searchProducts } from '../api/productData';
+import { useRouter } from 'next/router';
 
 export default function ProductSearch() {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
+  const router = useRouter();
 
   const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
@@ -11,15 +11,7 @@ export default function ProductSearch() {
 
   const handleSearchSubmit = async (event) => {
     event.preventDefault();
-    console.warn('Search form submitted');
-    console.warn('Search query:', searchQuery);
-    try {
-      const data = await searchProducts(searchQuery);
-      console.warn('Search results:', data);
-      setSearchResults(data);
-    } catch (error) {
-      console.error('Error searching products:', error);
-    }
+    router.push(`/?search=${encodeURIComponent(searchQuery)}`, undefined, { shallow: true });
   };
 
   return (
@@ -33,13 +25,8 @@ export default function ProductSearch() {
           className="form-control me-2"
           style={{ width: '200px', height: '30px', marginLeft: '30px' }}
         />
-        <button type="submit" className="btn btn-primary">Search</button>
+        <button type="submit" id="prodsearch">Search</button>
       </form>
-      <ul>
-        {searchResults.map((product) => (
-          <li key={product.id}>{product.name}</li>
-        ))}
-      </ul>
     </div>
   );
 }

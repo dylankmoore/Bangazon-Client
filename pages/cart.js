@@ -37,8 +37,8 @@ function ShoppingCartPage({ customerId }) {
   }, [cartProducts]);
 
   return (
-    <div>
-      <h1>Shopping Cart</h1>
+    <div><br />
+      <h1>Shopping Cart</h1><br />
       <ul>
         {cartProducts.map((product) => (
           <li key={product.productId}>

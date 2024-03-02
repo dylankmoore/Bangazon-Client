@@ -14,10 +14,10 @@ const ProductDetails = ({ product, handleAddToCart }) => (
         marginBottom: '10px',
       }}
     />
-    <p>Description: {product.description}</p>
-    <p>Price: ${product.price}</p>
-    <p>Seller: {product.seller?.firstName} {product.seller?.lastName || 'Unknown'}</p>
-    <p>Category: {product.category?.name || 'Unknown'}</p><br />
+    <p><b>Description</b>: {product.description}</p>
+    <p><b>Price</b>: ${product.price}</p>
+    <p><b>Seller</b>: {product.seller?.firstName} {product.seller?.lastName || 'Unknown'}</p>
+    <p><b>Category</b>: {product.category?.name || 'Unknown'}</p><br />
     <button type="button" onClick={() => handleAddToCart(product.id)}>Add to Cart</button>
 
   </div>
