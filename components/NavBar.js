@@ -30,7 +30,7 @@ export default function NavBar() {
             <Link passHref href="/categories">
               <Nav.Link>Product Categories</Nav.Link>
             </Link>
-            <Link passHref href="/orderhistory">
+            <Link passHref href="/orders">
               <Nav.Link>Order History</Nav.Link>
             </Link>
             <Link passHref href="/sellerdashboard">
